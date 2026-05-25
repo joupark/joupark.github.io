@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Signal & AI Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0c0f;
+      --surface: #111418;
+      --border: #1e2329;
+      --accent: #00d4aa;
+      --accent2: #0088ff;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Sans KR', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── GRID BACKGROUND ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── WAVEFORM HERO DECORATION ── */
+    .waveform-bg {
+      position: fixed;
+      top: 0; right: 0;
+      width: 50vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.07;
+    }
+
+    main { position: relative; z-index: 1; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 1.25rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,12,15,0.85);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 3rem; max-width: 1100px; margin: 0 auto; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 8rem;
+    }
+
+    .hero-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.2s forwards;
+    }
+
+    .hero-name {
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.35s forwards;
+    }
+
+    .hero-name em {
+      font-style: normal;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--accent);
+    }
+
+    .hero-desc {
+      margin-top: 2rem;
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.5s forwards;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.65s forwards;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      padding: 0.3rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .tag:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      margin-top: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.8s forwards;
+    }
+
+    .btn-primary {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      padding: 0.75rem 2rem;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-outline {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      padding: 0.75rem 2rem;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: border-color 0.2s;
+    }
+
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .skill-item { }
+
+    .skill-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .skill-bar {
+      height: 2px;
+      background: var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+      cursor: pointer;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover { border-color: #2d3748; }
+    .project-card:hover::before { transform: scaleX(1); }
+
+    .project-num {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-badge {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      padding: 0.2rem 0.6rem;
+      background: rgba(0, 212, 170, 0.08);
+      border: 1px solid rgba(0, 212, 170, 0.2);
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .project-link {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .project-link:hover { color: var(--accent); }
+
+    /* ── CONTACT ── */
+    .contact-inner {
+      max-width: 600px;
+    }
+
+    .contact-desc {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      transition: color 0.2s;
+    }
+
+    .contact-item:first-child { border-top: 1px solid var(--border); }
+    .contact-item:hover { color: var(--accent); }
+
+    .contact-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .contact-value {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .contact-arrow {
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+    }
+
+    .contact-item:hover .contact-arrow { transform: translateX(4px); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-text {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s, transform 0.6s;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── WAVEFORM SVG ANIMATION ── */
+    @keyframes waveScroll {
+      from { stroke-dashoffset: 0; }
+      to   { stroke-dashoffset: -200; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Waveform decoration -->
+<svg class="waveform-bg" viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="#00d4aa" stroke-width="1" fill="none">
+    <!-- Signal waveform lines -->
+    <polyline points="0,400 30,380 60,350 90,300 120,260 150,300 180,350 210,380 240,400 270,420 300,450 330,420 360,400 390,380 420,350 450,300 480,260 510,300 540,350 570,380 600,400" stroke-dasharray="8 4" opacity="0.6">
+      <animate attributeName="stroke-dashoffset" from="0" to="-36" dur="3s" repeatCount="indefinite"/>
+    </polyline>
+    <polyline points="0,430 20,410 60,360 100,310 140,280 180,310 220,360 260,410 300,430 340,450 380,430 420,410 460,360 500,310 540,280 580,310 600,330" stroke-dasharray="6 6" opacity="0.35">
+      <animate attributeName="stroke-dashoffset" from="0" to="-24" dur="4s" repeatCount="indefinite"/>
+    </polyline>
+    <polyline points="0,460 40,440 80,390 120,340 160,300 200,340 240,390 280,440 320,460 360,480 400,460 440,440 480,390 520,340 560,300 600,340" stroke-dasharray="4 8" opacity="0.2">
+      <animate attributeName="stroke-dashoffset" from="0" to="-24" dur="5s" repeatCount="indefinite"/>
+    </polyline>
+    <!-- Frequency domain bars -->
+    <g opacity="0.5">
+      <rect x="60"  y="600" width="6" height="20"  rx="1"><animate attributeName="height" values="20;60;20" dur="1.2s" repeatCount="indefinite"/><animate attributeName="y" values="600;560;600" dur="1.2s" repeatCount="indefinite"/></rect>
+      <rect x="80"  y="580" width="6" height="40"  rx="1"><animate attributeName="height" values="40;90;40" dur="1.5s" repeatCount="indefinite"/><animate attributeName="y" values="580;530;580" dur="1.5s" repeatCount="indefinite"/></rect>
+      <rect x="100" y="560" width="6" height="60"  rx="1"><animate attributeName="height" values="60;110;60" dur="1.0s" repeatCount="indefinite"/><animate attributeName="y" values="560;510;560" dur="1.0s" repeatCount="indefinite"/></rect>
+      <rect x="120" y="570" width="6" height="50"  rx="1"><animate attributeName="height" values="50;80;50" dur="1.8s" repeatCount="indefinite"/><animate attributeName="y" values="570;540;570" dur="1.8s" repeatCount="indefinite"/></rect>
+      <rect x="140" y="590" width="6" height="30"  rx="1"><animate attributeName="height" values="30;55;30" dur="1.3s" repeatCount="indefinite"/><animate attributeName="y" values="590;565;590" dur="1.3s" repeatCount="indefinite"/></rect>
+    </g>
+  </g>
+</svg>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">// portfolio</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section id="hero">
+    <p class="hero-label">Signal Processing & AI Engineer</p>
+    <h1 class="hero-name">홍길동<br><em>Engineer.</em></h1>
+    <p class="hero-desc">
+      영상 신호처리, 드론 제어, 인공지능 연구를 합니다.<br>
+      노이즈 속에서 패턴을 찾고, 시스템을 지능적으로 만듭니다.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">Signal Processing</span>
+      <span class="tag">Computer Vision</span>
+      <span class="tag">Drone Control</span>
+      <span class="tag">Deep Learning</span>
+      <span class="tag">MATLAB / Python</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-outline">Contact</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header reveal">
+      <span class="section-num">01 —</span>
+      <h2 class="section-title">About</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          신호처리와 인공지능의 교차점에서 연구합니다. 영상 데이터에서 의미 있는 정보를 추출하고, 드론 시스템을 더 스마트하게 만드는 것이 주요 관심사입니다.
+        </p>
+        <p>
+          복잡한 수학적 모델을 실용적인 시스템으로 구현하는 과정을 즐기며, 이론과 구현 모두에 집중합니다.
+        </p>
+      </div>
+      <div class="skills-list reveal">
+        <div class="skill-item">
+          <div class="skill-label">신호처리 / DSP</div>
+          <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-label">Computer Vision</div>
+          <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-label">Deep Learning</div>
+          <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-label">드론 제어 시스템</div>
+          <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-label">Python / MATLAB / C++</div>
+          <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header reveal">
+      <span class="section-num">02 —</span>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="project-num">PROJECT / 001</div>
+        <h3 class="project-title">영상 노이즈 제거 알고리즘</h3>
+        <p class="project-desc">딥러닝 기반 영상 신호처리 노이즈 제거 시스템. CNN 아키텍처를 활용해 다양한 노이즈 유형에 강인한 복원 성능 구현.</p>
+        <div class="project-tech">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">PyTorch</span>
+          <span class="tech-badge">OpenCV</span>
+          <span class="tech-badge">DSP</span>
+        </div>
+        <div class="project-links">
+          <a href="#" class="project-link">→ GitHub</a>
+          <a href="#" class="project-link">→ Demo</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-num">PROJECT / 002</div>
+        <h3 class="project-title">드론 자율 비행 제어</h3>
+        <p class="project-desc">PID 제어 기반 드론 안정화 시스템. 실시간 센서 데이터 융합과 상태 추정으로 외란에 강인한 자율 비행 구현.</p>
+        <div class="project-tech">
+          <span class="tech-badge">C++</span>
+          <span class="tech-badge">ROS</span>
+          <span class="tech-badge">MATLAB</span>
+          <span class="tech-badge">IMU</span>
+        </div>
+        <div class="project-links">
+          <a href="#" class="project-link">→ GitHub</a>
+          <a href="#" class="project-link">→ Paper</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-num">PROJECT / 003</div>
+        <h3 class="project-title">실시간 객체 추적 시스템</h3>
+        <p class="project-desc">영상 스트림에서 다중 객체를 실시간으로 추적하는 시스템. 칼만 필터와 딥러닝 검출기를 결합한 하이브리드 접근법.</p>
+        <div class="project-tech">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">YOLO</span>
+          <span class="tech-badge">Kalman Filter</span>
+          <span class="tech-badge">CUDA</span>
+        </div>
+        <div class="project-links">
+          <a href="#" class="project-link">→ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-num">PROJECT / 004</div>
+        <h3 class="project-title">스펙트럼 분석 도구</h3>
+        <p class="project-desc">신호의 주파수 도메인 분석을 위한 인터랙티브 도구. FFT 기반 스펙트럼 시각화와 필터 설계 기능 통합.</p>
+        <div class="project-tech">
+          <span class="tech-badge">MATLAB</span>
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">FFT</span>
+          <span class="tech-badge">NumPy</span>
+        </div>
+        <div class="project-links">
+          <a href="#" class="project-link">→ GitHub</a>
+          <a href="#" class="project-link">→ Demo</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-header reveal">
+      <span class="section-num">03 —</span>
+      <h2 class="section-title">Contact</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-inner reveal">
+      <p class="contact-desc">
+        협업, 연구, 또는 단순한 대화도 환영합니다.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:your@email.com" class="contact-item">
+          <span class="contact-label">Email</span>
+          <span class="contact-value">your@email.com</span>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a href="https://github.com/yourusername" target="_blank" class="contact-item">
+          <span class="contact-label">GitHub</span>
+          <span class="contact-value">github.com/yourusername</span>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank" class="contact-item">
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">linkedin.com/in/yourusername</span>
+          <span class="contact-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span class="footer-text">© 2025 홍길동</span>
+  <span class="footer-text">Signal & AI Engineer</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Skill bars
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-fill').forEach(fill => {
+          fill.style.width = fill.dataset.width + '%';
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const skillSection = document.querySelector('.skills-list');
+  if (skillSection) barObserver.observe(skillSection);
+</script>
+</body>
+</html>
