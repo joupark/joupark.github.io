@@ -3,639 +3,639 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SAIL Lab — California Baptist University</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <title>SAIL Lab — CBU</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --white: #ffffff;
-      --off-white: #f7f7f5;
-      --light: #efefec;
-      --border: #e0e0da;
-      --text: #1a1a18;
-      --muted: #777770;
-      --faint: #b0b0a8;
-      --accent: #1a4fd6;
-      --accent-light: #e8edf9;
-      --serif: 'Playfair Display', Georgia, serif;
-      --sans: 'DM Sans', sans-serif;
-      --mono: 'DM Mono', monospace;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { background: var(--white); color: var(--text); font-family: var(--sans); font-weight: 300; line-height: 1.75; -webkit-font-smoothing: antialiased; }
 
-    /* NAV */
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #111;
+      background: #fff;
+    }
+
+    a { color: #1a4fd6; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── LAYOUT ── */
+    header, nav, main, footer {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e5e5e5;
+      margin: 48px 0;
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 24px;
+    }
+
+    /* ── NAV ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      background: rgba(255,255,255,0.92); backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 4rem; height: 64px;
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 28px;
+      padding-bottom: 28px;
+      gap: 16px;
     }
-    .nav-brand { display: flex; flex-direction: column; line-height: 1.2; }
-    .nav-brand-top { font-family: var(--serif); font-size: 0.95rem; font-weight: 500; color: var(--text); }
-    .nav-brand-sub { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
-    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
-    .nav-links a { font-family: var(--sans); font-size: 0.82rem; color: var(--muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--accent); }
-    .nav-cta { font-weight: 500 !important; color: var(--white) !important; background: var(--accent); padding: 0.45rem 1.1rem; border-radius: 4px; }
-    .nav-cta:hover { opacity: 0.85; color: var(--white) !important; }
 
-    /* HERO */
-    #hero { padding-top: 64px; min-height: 90vh; display: grid; grid-template-columns: 1fr 1fr; max-width: 1200px; margin: 0 auto; }
-    .hero-left { padding: 7rem 4rem 5rem; display: flex; flex-direction: column; justify-content: center; }
-    .hero-eyebrow { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s 0.1s forwards; }
-    .hero-title { font-family: var(--serif); font-size: clamp(2.4rem, 4vw, 3.6rem); font-weight: 500; line-height: 1.15; margin-bottom: 1.75rem; opacity: 0; animation: fadeUp 0.7s 0.25s forwards; }
-    .hero-title span { color: var(--accent); }
-    .hero-desc { font-size: 1rem; color: var(--muted); max-width: 440px; line-height: 1.8; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.7s 0.4s forwards; }
-    .sail-acronym {
-      display: flex; gap: 1.2rem; align-items: baseline;
-      margin-bottom: 1.5rem;
-      opacity: 0; animation: fadeUp 0.7s 0.38s forwards;
+    .nav-logo {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #111;
+      white-space: nowrap;
     }
-    .sail-acronym span {
-      font-family: var(--mono); font-size: 0.8rem; color: var(--muted);
-      letter-spacing: 0.06em;
+
+    .nav-logo span {
+      color: #1a4fd6;
     }
-    .sail-acronym em {
-      font-style: normal; font-weight: 500;
-      color: var(--accent); font-size: 1rem;
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      flex-wrap: wrap;
     }
-    .hero-meta { display: flex; gap: 2.5rem; opacity: 0; animation: fadeUp 0.7s 0.55s forwards; }
-    .hero-meta-item { display: flex; flex-direction: column; }
-    .hero-meta-num { font-family: var(--serif); font-size: 1.8rem; font-weight: 500; line-height: 1; }
-    .hero-meta-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-top: 0.3rem; }
-    .hero-right { display: flex; align-items: center; justify-content: center; padding: 7rem 4rem 5rem 2rem; opacity: 0; animation: fadeIn 1s 0.5s forwards; }
-    .signal-diagram { width: 100%; max-width: 400px; }
 
-    /* DIVIDER */
-    .divider { border: none; border-top: 1px solid var(--border); max-width: 1200px; margin: 0 auto; }
-
-    /* SECTIONS */
-    .section { max-width: 1200px; margin: 0 auto; padding: 6rem 4rem; }
-    .section-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
-    .section-title { font-family: var(--serif); font-size: 2rem; font-weight: 500; margin-bottom: 3rem; line-height: 1.25; }
-
-    /* RESEARCH */
-    .research-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-    .research-card { background: var(--white); padding: 2.5rem; transition: background 0.25s; }
-    .research-card:hover { background: var(--off-white); }
-    .research-icon { width: 40px; height: 40px; margin-bottom: 1.5rem; color: var(--accent); }
-    .research-num { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.15em; color: var(--faint); margin-bottom: 0.75rem; }
-    .research-title { font-family: var(--serif); font-size: 1.2rem; font-weight: 500; margin-bottom: 0.75rem; line-height: 1.3; }
-    .research-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.5rem; }
-    .research-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .r-tag { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.06em; padding: 0.2rem 0.65rem; background: var(--accent-light); color: var(--accent); border-radius: 2px; }
-
-    /* PEOPLE */
-    .people-bg { background: var(--off-white); }
-    .people-layout { display: grid; grid-template-columns: 280px 1fr; gap: 5rem; align-items: start; }
-    .pi-card { background: var(--white); border: 1px solid var(--border); padding: 2rem; text-align: center; }
-    .pi-avatar { width: 100px; height: 100px; border-radius: 50%; background: var(--light); margin: 0 auto 1.25rem; display: flex; align-items: center; justify-content: center; border: 2px solid var(--border); }
-    .pi-avatar-initials { font-family: var(--serif); font-size: 1.8rem; font-weight: 500; color: var(--accent); }
-    .pi-name { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; margin-bottom: 0.2rem; }
-    .pi-role { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
-    .pi-affil { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.25rem; line-height: 1.5; }
-    .pi-email { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); text-decoration: none; display: block; padding: 0.6rem; border: 1px solid var(--accent-light); background: var(--accent-light); border-radius: 3px; transition: background 0.2s, color 0.2s; margin-bottom: 0.5rem; }
-    .pi-email:hover { background: var(--accent); color: var(--white); }
-    .pi-scholar { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); text-decoration: none; display: block; padding: 0.6rem; border: 1px solid var(--border); background: var(--white); border-radius: 3px; transition: border-color 0.2s, color 0.2s; }
-    .pi-scholar:hover { border-color: var(--accent); color: var(--accent); }
-    .pi-desc-area h3 { font-family: var(--serif); font-size: 1.4rem; font-weight: 500; margin-bottom: 1rem; }
-    .pi-desc-area p { font-size: 0.92rem; color: var(--muted); line-height: 1.8; margin-bottom: 1rem; max-width: 560px; }
-    .pi-interests { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
-    .interest-tag { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.06em; padding: 0.3rem 0.8rem; border: 1px solid var(--border); color: var(--muted); border-radius: 2px; }
-
-    /* PUBLICATIONS */
-    /* Filter tabs */
-    .pub-filters { display: flex; gap: 0.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
-    .pub-filter-btn {
-      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 0.4rem 1rem; border: 1px solid var(--border); background: var(--white);
-      color: var(--muted); cursor: pointer; border-radius: 2px; transition: all 0.2s;
+    .nav-links a {
+      font-size: 0.88rem;
+      color: #555;
+      text-decoration: none;
     }
-    .pub-filter-btn:hover { border-color: var(--accent); color: var(--accent); }
-    .pub-filter-btn.active { background: var(--accent); border-color: var(--accent); color: var(--white); }
 
-    .pub-list { display: flex; flex-direction: column; }
+    .nav-links a:hover { color: #1a4fd6; }
+
+    /* ── HERO ── */
+    header {
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+
+    .lab-name {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .lab-full {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 24px;
+      letter-spacing: 0.01em;
+    }
+
+    .lab-full strong {
+      color: #1a4fd6;
+      font-weight: 500;
+    }
+
+    header p {
+      font-size: 1.05rem;
+      color: #444;
+      max-width: 580px;
+      line-height: 1.75;
+    }
+
+    /* ── SECTION ── */
+    section {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 24px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #111;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── RESEARCH ── */
+    .research-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .research-item {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .research-num {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #1a4fd6;
+      padding-top: 3px;
+    }
+
+    .research-item h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .research-item p {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.65;
+    }
+
+    /* ── PEOPLE ── */
+    .person {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 20px 0;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .person:first-child { border-top: 1px solid #e5e5e5; }
+
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #eef2fb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #1a4fd6;
+      flex-shrink: 0;
+    }
+
+    .person-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .person-role {
+      font-size: 0.82rem;
+      color: #1a4fd6;
+      margin-bottom: 4px;
+    }
+
+    .person-desc {
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .person-links {
+      margin-top: 6px;
+      display: flex;
+      gap: 16px;
+    }
+
+    .person-links a {
+      font-size: 0.8rem;
+    }
+
+    /* ── PUBLICATIONS ── */
+    .pub-filters {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .pub-filters button {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      padding: 4px 14px;
+      border: 1px solid #ddd;
+      background: #fff;
+      border-radius: 20px;
+      cursor: pointer;
+      color: #555;
+      transition: all 0.15s;
+    }
+
+    .pub-filters button:hover { border-color: #1a4fd6; color: #1a4fd6; }
+    .pub-filters button.active { background: #1a4fd6; border-color: #1a4fd6; color: #fff; }
+
     .pub-item {
-      display: grid; grid-template-columns: 56px 1fr auto;
-      gap: 1.5rem; padding: 1.75rem 0;
-      border-bottom: 1px solid var(--border); align-items: start;
-      transition: opacity 0.3s;
+      padding: 18px 0;
+      border-bottom: 1px solid #e5e5e5;
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 16px;
+      align-items: start;
     }
-    .pub-item:first-of-type { border-top: 1px solid var(--border); }
+
+    .pub-item:first-of-type { border-top: 1px solid #e5e5e5; }
     .pub-item.hidden { display: none; }
-    .pub-year { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--faint); padding-top: 0.15rem; }
-    .pub-body {}
-    .pub-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 500; line-height: 1.4; margin-bottom: 0.3rem; }
-    .pub-authors { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.25rem; }
-    .pub-venue { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); letter-spacing: 0.03em; }
-    .pub-type-badge {
-      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase;
-      padding: 0.2rem 0.55rem; border-radius: 2px; white-space: nowrap; align-self: start; margin-top: 0.15rem;
+
+    .pub-year {
+      font-size: 0.78rem;
+      color: #aaa;
+      padding-top: 3px;
+      font-weight: 500;
     }
-    .badge-journal { background: #e8f4e8; color: #2a7a2a; }
-    .badge-conference { background: var(--accent-light); color: var(--accent); }
-    .badge-patent { background: #fef3e2; color: #a05c00; }
-    .badge-thesis { background: #f3e8f9; color: #7a2a9a; }
 
-    /* CONTACT */
-    .contact-bg { background: var(--text); }
-    .contact-bg .section-label { color: #6699ff; }
-    .contact-bg .section-title { color: var(--white); margin-bottom: 2rem; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-    .contact-desc { font-size: 0.95rem; color: #888; line-height: 1.8; margin-bottom: 2rem; }
-    .contact-info-list { display: flex; flex-direction: column; gap: 1rem; }
-    .contact-info-item { display: flex; flex-direction: column; gap: 0.15rem; }
-    .ci-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: #555; }
-    .ci-value { font-size: 0.9rem; color: #ccc; }
-    .ci-value a { color: #6699ff; text-decoration: none; }
-    .ci-value a:hover { text-decoration: underline; }
-    .contact-box { background: #1a1a1a; border: 1px solid #2a2a2a; padding: 2.5rem; }
-    .contact-box-title { font-family: var(--serif); font-size: 1.1rem; color: var(--white); margin-bottom: 1rem; }
-    .contact-box-text { font-size: 0.88rem; color: #666; line-height: 1.8; margin-bottom: 1.5rem; }
-    .contact-box-link { display: inline-block; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; color: #6699ff; text-decoration: none; border: 1px solid #6699ff33; padding: 0.5rem 1.2rem; border-radius: 3px; transition: background 0.2s; }
-    .contact-box-link:hover { background: #6699ff22; }
+    .pub-title {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: #111;
+      margin-bottom: 3px;
+      line-height: 1.45;
+    }
 
-    /* FOOTER */
-    footer { background: #111; border-top: 1px solid #222; padding: 1.5rem 4rem; display: flex; justify-content: space-between; align-items: center; }
-    .footer-text { font-family: var(--mono); font-size: 0.68rem; color: #444; letter-spacing: 0.06em; }
+    .pub-authors {
+      font-size: 0.82rem;
+      color: #777;
+      margin-bottom: 2px;
+    }
 
-    /* ANIMATIONS */
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
+    .pub-venue {
+      font-size: 0.8rem;
+      color: #1a4fd6;
+    }
 
-    /* RESPONSIVE */
-    @media (max-width: 900px) {
-      nav { padding: 0 1.5rem; }
-      .nav-links li:not(:last-child) { display: none; }
-      #hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-left { padding: 5rem 1.5rem 2rem; }
-      .hero-right { display: none; }
-      .section { padding: 4rem 1.5rem; }
-      .research-grid { grid-template-columns: 1fr; }
-      .people-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+    .pub-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 1px 7px;
+      border-radius: 3px;
+      margin-left: 8px;
+      vertical-align: middle;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .badge-journal    { background: #e6f4ea; color: #1e7e34; }
+    .badge-conference { background: #eef2fb; color: #1a4fd6; }
+    .badge-patent     { background: #fff3e0; color: #e65c00; }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .contact-item {
+      margin-bottom: 16px;
+    }
+
+    .contact-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #aaa;
+      margin-bottom: 2px;
+    }
+
+    .contact-value {
+      font-size: 0.9rem;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding-top: 24px;
+      padding-bottom: 40px;
+      font-size: 0.8rem;
+      color: #aaa;
+      border-top: 1px solid #e5e5e5;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .nav-links { gap: 16px; }
+      .lab-name { font-size: 1.6rem; }
+      header p { font-size: 0.95rem; }
       .contact-grid { grid-template-columns: 1fr; }
-      .pub-item { grid-template-columns: 48px 1fr; }
-      .pub-type-badge { display: none; }
-      footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem; }
     }
   </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <div class="nav-brand">
-    <span class="nav-brand-top">SAIL Lab</span>
-    <span class="nav-brand-sub">California Baptist University</span>
-  </div>
+  <span class="nav-logo"><span>SAIL</span> Lab</span>
   <ul class="nav-links">
     <li><a href="#research">Research</a></li>
     <li><a href="#people">People</a></li>
     <li><a href="#publications">Publications</a></li>
-    <li><a href="#contact" class="nav-cta">Contact</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
-<section id="hero">
-  <div class="hero-left">
-    <p class="hero-eyebrow">CBU · SAIL Lab</p>
-    <h1 class="hero-title">Intelligent<br><span>Signal Processing</span></h1>
-    <div class="sail-acronym">
-      <span><em>S</em>ignal &amp;</span>
-      <span><em>A</em>I</span>
-      <span><em>L</em>ab</span>
-    </div>
-    <p class="hero-desc">We research at the intersection of signal processing, autonomous systems, and multimodal AI — from clean speech to intelligent autonomous agents.</p>
-    <div class="hero-meta">
-      <div class="hero-meta-item">
-        <span class="hero-meta-num">4</span>
-        <span class="hero-meta-label">Research Areas</span>
-      </div>
-      <div class="hero-meta-item">
-        <span class="hero-meta-num">40+</span>
-        <span class="hero-meta-label">Publications</span>
-      </div>
-      <div class="hero-meta-item">
-        <span class="hero-meta-num">5</span>
-        <span class="hero-meta-label">US Patents</span>
-      </div>
-    </div>
+<header>
+  <div class="lab-name">SAIL Lab</div>
+  <div class="lab-full">
+    <strong>S</strong>ignal &amp; <strong>A</strong>I <strong>L</strong>ab &nbsp;·&nbsp; California Baptist University
   </div>
-  <div class="hero-right">
-    <svg class="signal-diagram" viewBox="0 0 400 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <line x1="0" y1="80"  x2="400" y2="80"  stroke="#e0e0da" stroke-width="1"/>
-      <line x1="0" y1="140" x2="400" y2="140" stroke="#e0e0da" stroke-width="1"/>
-      <line x1="0" y1="200" x2="400" y2="200" stroke="#e0e0da" stroke-width="1"/>
-      <line x1="80"  y1="40" x2="80"  y2="240" stroke="#e0e0da" stroke-width="1"/>
-      <line x1="160" y1="40" x2="160" y2="240" stroke="#e0e0da" stroke-width="1"/>
-      <line x1="240" y1="40" x2="240" y2="240" stroke="#e0e0da" stroke-width="1"/>
-      <line x1="320" y1="40" x2="320" y2="240" stroke="#e0e0da" stroke-width="1"/>
-      <polyline points="20,140 35,155 45,120 55,162 65,115 75,148 85,130 95,165 105,110 115,155 125,118 135,160 145,112 155,152 165,125 175,162 185,108 195,155 205,118 215,158 225,112 235,150 245,120 255,160 265,115 275,152 285,125 295,162 305,110 315,158 325,118 335,155 345,112 355,152 375,140" stroke="#c8c8c0" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
-      <polyline points="20,140 50,100 80,140 110,180 140,140 170,100 200,140 230,180 260,140 290,100 320,140 350,180 380,140" stroke="#1a4fd6" stroke-width="2.2" fill="none"/>
-      <polyline points="20,140 50,100 80,140 110,180 140,140 170,100 200,140 230,180 260,140 290,100 320,140 350,180 380,140 380,240 20,240" fill="#1a4fd6" fill-opacity="0.05"/>
-      <line x1="20" y1="40" x2="20" y2="240" stroke="#b0b0a8" stroke-width="1.5"/>
-      <line x1="20" y1="240" x2="390" y2="240" stroke="#b0b0a8" stroke-width="1.5"/>
-      <text x="22" y="260" font-family="DM Mono,monospace" font-size="9" fill="#b0b0a8">0</text>
-      <text x="370" y="260" font-family="DM Mono,monospace" font-size="9" fill="#b0b0a8">t</text>
-      <text x="4"  y="44"  font-family="DM Mono,monospace" font-size="9" fill="#b0b0a8">A</text>
-      <g transform="translate(0,20)">
-        <rect x="60"  y="295" width="12" height="18" fill="#e0e0da" rx="1"/>
-        <rect x="90"  y="278" width="12" height="35" fill="#1a4fd6" fill-opacity="0.3" rx="1"/>
-        <rect x="120" y="262" width="12" height="51" fill="#1a4fd6" fill-opacity="0.5" rx="1"/>
-        <rect x="150" y="250" width="12" height="63" fill="#1a4fd6" fill-opacity="0.7" rx="1"/>
-        <rect x="180" y="258" width="12" height="55" fill="#1a4fd6" fill-opacity="0.6" rx="1"/>
-        <rect x="210" y="272" width="12" height="41" fill="#1a4fd6" fill-opacity="0.4" rx="1"/>
-        <rect x="240" y="285" width="12" height="28" fill="#1a4fd6" fill-opacity="0.25" rx="1"/>
-        <rect x="270" y="292" width="12" height="21" fill="#e0e0da" rx="1"/>
-        <rect x="300" y="298" width="12" height="15" fill="#e0e0da" rx="1"/>
-        <line x1="48" y1="313" x2="330" y2="313" stroke="#b0b0a8" stroke-width="1"/>
-        <text x="48"  y="324" font-family="DM Mono,monospace" font-size="8" fill="#b0b0a8">0</text>
-        <text x="310" y="324" font-family="DM Mono,monospace" font-size="8" fill="#b0b0a8">freq →</text>
-      </g>
-      <line x1="28" y1="30" x2="55" y2="30" stroke="#c8c8c0" stroke-width="1.2" stroke-dasharray="3 3"/>
-      <text x="60" y="34" font-family="DM Mono,monospace" font-size="8" fill="#b0b0a8">noisy</text>
-      <line x1="110" y1="30" x2="137" y2="30" stroke="#1a4fd6" stroke-width="2"/>
-      <text x="142" y="34" font-family="DM Mono,monospace" font-size="8" fill="#1a4fd6">enhanced</text>
-    </svg>
-  </div>
-</section>
-
-<hr class="divider">
+  <p>
+    We research at the intersection of signal processing and artificial intelligence —
+    developing systems that hear, perceive, and act intelligently in the real world.
+  </p>
+</header>
 
 <!-- RESEARCH -->
-<section id="research" class="section">
-  <p class="section-label reveal">Research Areas</p>
-  <h2 class="section-title reveal">What We Work On</h2>
-  <div class="research-grid">
-    <div class="research-card reveal">
-      <div class="research-num">01</div>
-      <svg class="research-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M5 20 Q10 8 15 20 Q20 32 25 20 Q30 8 35 20"/>
-        <circle cx="5" cy="20" r="1.5" fill="currentColor"/>
-        <circle cx="35" cy="20" r="1.5" fill="currentColor"/>
-      </svg>
-      <h3 class="research-title">Speech Enhancement</h3>
-      <p class="research-desc">Recovering clean, intelligible speech from noisy and reverberant environments. We develop deep neural network architectures — including spectral masking and waveform-domain models — targeting real-world communication and assistive listening applications.</p>
-      <div class="research-tags">
-        <span class="r-tag">Deep Learning</span>
-        <span class="r-tag">STFT / Masking</span>
-        <span class="r-tag">Noise Cancellation</span>
-        <span class="r-tag">PyTorch</span>
+<section id="research">
+  <h2>Research</h2>
+  <div class="research-list">
+
+    <div class="research-item">
+      <span class="research-num">01</span>
+      <div>
+        <h3>Speech Enhancement</h3>
+        <p>Recovering clean, intelligible speech from noisy and reverberant environments using deep neural networks and spectral masking techniques.</p>
       </div>
     </div>
-    <div class="research-card reveal">
-      <div class="research-num">02</div>
-      <svg class="research-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
-        <rect x="15" y="8" width="10" height="6" rx="1"/>
-        <path d="M20 14 L20 22"/>
-        <circle cx="20" cy="26" r="4"/>
-        <path d="M10 32 L14 28 M30 32 L26 28"/>
-        <path d="M6 18 Q4 26 10 32 M34 18 Q36 26 30 32"/>
-      </svg>
-      <h3 class="research-title">UAV Networking and Control</h3>
-      <p class="research-desc">Autonomous flight control for unmanned aerial vehicles in dynamic environments. Research spans sensor fusion, state estimation, and adaptive control — enabling stable UAV operation and smart transportation applications beyond line-of-sight.</p>
-      <div class="research-tags">
-        <span class="r-tag">ROS</span>
-        <span class="r-tag">Adaptive Control</span>
-        <span class="r-tag">IMU Fusion</span>
-        <span class="r-tag">C++ / MATLAB</span>
+
+    <div class="research-item">
+      <span class="research-num">02</span>
+      <div>
+        <h3>UAV Control</h3>
+        <p>Autonomous flight control for unmanned aerial vehicles. Sensor fusion, state estimation, and adaptive control for stable and precise UAV operation.</p>
       </div>
     </div>
-    <div class="research-card reveal">
-      <div class="research-num">03</div>
-      <svg class="research-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
-        <rect x="4" y="10" width="14" height="10" rx="1.5"/>
-        <rect x="22" y="10" width="14" height="10" rx="1.5"/>
-        <rect x="13" y="26" width="14" height="8" rx="1.5"/>
-        <line x1="11" y1="20" x2="20" y2="26"/>
-        <line x1="29" y1="20" x2="20" y2="26"/>
-      </svg>
-      <h3 class="research-title">Vision-Language-Action</h3>
-      <p class="research-desc">End-to-end models that ground natural language in visual perception to drive robot actions. We study cross-modal alignment, generalizable policy learning, and efficient architectures for embodied AI in open-world settings.</p>
-      <div class="research-tags">
-        <span class="r-tag">Transformer</span>
-        <span class="r-tag">CLIP / LLM</span>
-        <span class="r-tag">Embodied AI</span>
-        <span class="r-tag">RL</span>
+
+    <div class="research-item">
+      <span class="research-num">03</span>
+      <div>
+        <h3>Vision-Language-Action (VLA)</h3>
+        <p>End-to-end models that ground natural language in visual perception to produce robot actions. Cross-modal alignment for embodied AI agents.</p>
       </div>
     </div>
-    <div class="research-card reveal">
-      <div class="research-num">04</div>
-      <svg class="research-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
-        <circle cx="20" cy="20" r="6"/>
-        <path d="M20 6 L20 14 M20 26 L20 34 M6 20 L14 20 M26 20 L34 20"/>
-        <path d="M10.1 10.1 L15.2 15.2 M24.8 24.8 L29.9 29.9 M29.9 10.1 L24.8 15.2 M15.2 24.8 L10.1 29.9"/>
-      </svg>
-      <h3 class="research-title">Multimodal Perception</h3>
-      <p class="research-desc">Unified perception frameworks fusing visual, auditory, and linguistic signals for scene understanding. Includes 360° video streaming, volumetric media, semantic-aware view prediction, and cross-modal attention for heterogeneous sensor streams.</p>
-      <div class="research-tags">
-        <span class="r-tag">360° Video</span>
-        <span class="r-tag">Cross-modal Attention</span>
-        <span class="r-tag">ViT</span>
-        <span class="r-tag">HuggingFace</span>
+
+    <div class="research-item">
+      <span class="research-num">04</span>
+      <div>
+        <h3>Multimodal Perception</h3>
+        <p>Fusing visual, auditory, and linguistic signals for unified scene understanding. Includes 360° video streaming, volumetric media, and semantic-aware perception.</p>
       </div>
     </div>
+
   </div>
 </section>
 
-<hr class="divider">
-
 <!-- PEOPLE -->
-<div id="people" class="people-bg">
-  <div class="section">
-    <p class="section-label reveal">People</p>
-    <h2 class="section-title reveal">Lab Members</h2>
-    <div class="people-layout">
-      <div class="pi-card reveal">
-        <div class="pi-avatar"><span class="pi-avatar-initials">JP</span></div>
-        <div class="pi-name">Jounsup Park</div>
-        <div class="pi-role">Principal Investigator</div>
-        <div class="pi-affil">School of Engineering<br>California Baptist University</div>
-        <a href="mailto:joupark@calbaptist.edu" class="pi-email">joupark@calbaptist.edu</a>
-        <a href="https://scholar.google.com/citations?user=r6S0NJUAAAAJ" target="_blank" class="pi-scholar">Google Scholar →</a>
+<section id="people">
+  <h2>People</h2>
+
+  <div class="person">
+    <div class="avatar">JP</div>
+    <div>
+      <div class="person-name">Jounsup Park</div>
+      <div class="person-role">Principal Investigator</div>
+      <div class="person-desc">
+        School of Engineering, California Baptist University.
+        Research interests: speech enhancement, UAV control, multimodal AI, and 360° video streaming.
       </div>
-      <div class="pi-desc-area reveal">
-        <h3>Principal Investigator</h3>
-        <p>Dr. Jounsup Park leads the SAIL Lab at California Baptist University. His research spans the full arc from classical signal processing to modern AI — including speech enhancement, UAV autonomy, 360° video streaming, volumetric media, and multimodal perception.</p>
-        <p>He has published extensively at IEEE GLOBECOM, ACM Multimedia, SPIE, and in IEEE Transactions journals, and holds multiple US patents in wireless communications and signal processing. Prior to CBU, he conducted research at 8i Labs, Samsung and the University of Illinois Urbana-Champaign.</p>
-        <div class="pi-interests">
-          <span class="interest-tag">Speech Enhancement</span>
-          <span class="interest-tag">UAV Control</span>
-          <span class="interest-tag">360° Video Streaming</span>
-          <span class="interest-tag">Volumetric Media</span>
-          <span class="interest-tag">Multimodal AI</span>
-          <span class="interest-tag">Wireless Communications</span>
-          <span class="interest-tag">DSP</span>
-        </div>
+      <div class="person-links">
+        <a href="mailto:joupark@calbaptist.edu">Email</a>
+        <a href="https://scholar.google.com/citations?user=r6S0NJUAAAAJ" target="_blank">Google Scholar</a>
+        <a href="https://joupark.github.io" target="_blank">Website</a>
       </div>
     </div>
   </div>
-</div>
 
-<hr class="divider">
+  <!-- Add new members below in the same format -->
+
+</section>
 
 <!-- PUBLICATIONS -->
-<section id="publications" class="section">
-  <p class="section-label reveal">Publications</p>
-  <h2 class="section-title reveal">Selected Works</h2>
+<section id="publications">
+  <h2>Publications</h2>
 
-  <div class="pub-filters reveal">
-    <button class="pub-filter-btn active" data-filter="all">All</button>
-    <button class="pub-filter-btn" data-filter="journal">Journals</button>
-    <button class="pub-filter-btn" data-filter="conference">Conferences</button>
-    <button class="pub-filter-btn" data-filter="patent">Patents</button>
+  <div class="pub-filters">
+    <button class="active" data-filter="all">All</button>
+    <button data-filter="journal">Journals</button>
+    <button data-filter="conference">Conferences</button>
+    <button data-filter="patent">Patents</button>
   </div>
 
-  <div class="pub-list">
+  <div id="pub-list">
 
-    <div class="pub-item reveal" data-type="conference">
+    <div class="pub-item" data-type="conference">
       <span class="pub-year">2023</span>
-      <div class="pub-body">
-        <div class="pub-title">Dual-MIC Delay Matching for Adaptive Noise Cancellation</div>
+      <div>
+        <div class="pub-title">Dual-MIC Delay Matching for Adaptive Noise Cancellation <span class="pub-badge badge-conference">Conference</span></div>
         <div class="pub-authors">Jounsup Park</div>
         <div class="pub-venue">IEEE ICECCE 2023</div>
       </div>
-      <span class="pub-type-badge badge-conference">Conference</span>
     </div>
 
-    <div class="pub-item reveal" data-type="journal">
+    <div class="pub-item" data-type="journal">
       <span class="pub-year">2022</span>
-      <div class="pub-body">
-        <div class="pub-title">BlueFMCW: Random Frequency Hopping Radar for Mitigation of Interference and Spoofing</div>
+      <div>
+        <div class="pub-title">BlueFMCW: Random Frequency Hopping Radar for Mitigation of Interference and Spoofing <span class="pub-badge badge-journal">Journal</span></div>
         <div class="pub-authors">Thomas Moon, Jounsup Park, Seungmo Kim</div>
-        <div class="pub-venue">EURASIP Journal on Advances in Signal Processing, vol. 2022</div>
+        <div class="pub-venue">EURASIP Journal on Advances in Signal Processing, 2022</div>
       </div>
-      <span class="pub-type-badge badge-journal">Journal</span>
     </div>
 
-    <div class="pub-item reveal" data-type="conference">
+    <div class="pub-item" data-type="conference">
       <span class="pub-year">2022</span>
-      <div class="pub-body">
-        <div class="pub-title">Semantic-Aware View Prediction for 360-Degree Videos at the 5G Edge</div>
+      <div>
+        <div class="pub-title">Semantic-Aware View Prediction for 360-Degree Videos at the 5G Edge <span class="pub-badge badge-conference">Conference</span></div>
         <div class="pub-authors">Shivi Vats, Jounsup Park, Klara Nahrstedt, Michael Zink, Ramesh Sitaraman, Hermann Hellwagner</div>
         <div class="pub-venue">IEEE ISM 2022</div>
       </div>
-      <span class="pub-type-badge badge-conference">Conference</span>
     </div>
 
-    <div class="pub-item reveal" data-type="conference">
+    <div class="pub-item" data-type="conference">
       <span class="pub-year">2022</span>
-      <div class="pub-body">
-        <div class="pub-title">UAV-Based Travel Assistive Technology for Smart Transportation</div>
+      <div>
+        <div class="pub-title">UAV-Based Travel Assistive Technology for Smart Transportation <span class="pub-badge badge-conference">Conference</span></div>
         <div class="pub-authors">Nathan McNamara, Jounsup Park, Matthew Vechione, Prabha Sundaravadivel</div>
         <div class="pub-venue">IEEE DCAS 2022</div>
       </div>
-      <span class="pub-type-badge badge-conference">Conference</span>
     </div>
 
-    <div class="pub-item reveal" data-type="conference">
+    <div class="pub-item" data-type="conference">
       <span class="pub-year">2021</span>
-      <div class="pub-body">
-        <div class="pub-title">Real-Time Object Detection in 360-Degree Videos</div>
+      <div>
+        <div class="pub-title">Real-Time Object Detection in 360-Degree Videos <span class="pub-badge badge-conference">Conference</span></div>
         <div class="pub-authors">Jounsup Park</div>
         <div class="pub-venue">SPIE Real-Time Image Processing and Deep Learning 2021</div>
       </div>
-      <span class="pub-type-badge badge-conference">Conference</span>
     </div>
 
-    <div class="pub-item reveal" data-type="journal">
+    <div class="pub-item" data-type="journal">
       <span class="pub-year">2021</span>
-      <div class="pub-body">
-        <div class="pub-title">Multi-Session Multicasting for 360-Degree Video Multicast over OFDMA Systems</div>
+      <div>
+        <div class="pub-title">Multi-Session Multicasting for 360-Degree Video Multicast over OFDMA Systems <span class="pub-badge badge-journal">Journal</span></div>
         <div class="pub-authors">Jounsup Park</div>
         <div class="pub-venue">International Journal of Digital Multimedia Broadcasting, 2021</div>
       </div>
-      <span class="pub-type-badge badge-journal">Journal</span>
     </div>
 
-    <div class="pub-item reveal" data-type="patent">
+    <div class="pub-item" data-type="patent">
       <span class="pub-year">2020</span>
-      <div class="pub-body">
-        <div class="pub-title">Hologram Streaming Machine</div>
+      <div>
+        <div class="pub-title">Hologram Streaming Machine <span class="pub-badge badge-patent">Patent</span></div>
         <div class="pub-authors">Philip A. Chou, Kieran Thawley, Robert Higgs, Jounsup Park</div>
         <div class="pub-venue">US Patent 10,834,391</div>
       </div>
-      <span class="pub-type-badge badge-patent">Patent</span>
     </div>
 
-    <div class="pub-item reveal" data-type="conference">
+    <div class="pub-item" data-type="conference">
       <span class="pub-year">2020</span>
-      <div class="pub-body">
-        <div class="pub-title">SEAware: Semantic Aware View Prediction System for 360-Degree Video Streaming</div>
+      <div>
+        <div class="pub-title">SEAware: Semantic Aware View Prediction System for 360-Degree Video Streaming <span class="pub-badge badge-conference">Conference</span></div>
         <div class="pub-authors">Jounsup Park, Mingyuan Wu, Kuan-Ying Lee, Bo Chen, Klara Nahrstedt, Michael Zink, Ramesh Sitaraman</div>
         <div class="pub-venue">IEEE ISM 2020</div>
       </div>
-      <span class="pub-type-badge badge-conference">Conference</span>
     </div>
 
-    <div class="pub-item reveal" data-type="conference">
+    <div class="pub-item" data-type="conference">
       <span class="pub-year">2019</span>
-      <div class="pub-body">
-        <div class="pub-title">Navigation Graph for Tiled Media Streaming</div>
+      <div>
+        <div class="pub-title">Navigation Graph for Tiled Media Streaming <span class="pub-badge badge-conference">Conference</span></div>
         <div class="pub-authors">Jounsup Park, Klara Nahrstedt</div>
         <div class="pub-venue">ACM Multimedia 2019</div>
       </div>
-      <span class="pub-type-badge badge-conference">Conference</span>
     </div>
 
-    <div class="pub-item reveal" data-type="journal">
+    <div class="pub-item" data-type="journal">
       <span class="pub-year">2019</span>
-      <div class="pub-body">
-        <div class="pub-title">Rate-Utility Optimized Streaming of Volumetric Media for Augmented Reality</div>
+      <div>
+        <div class="pub-title">Rate-Utility Optimized Streaming of Volumetric Media for Augmented Reality <span class="pub-badge badge-journal">Journal</span></div>
         <div class="pub-authors">Jounsup Park, Philip A. Chou, Jenq-Neng Hwang</div>
         <div class="pub-venue">IEEE Journal on Emerging and Selected Topics in Circuits and Systems, vol. 9, no. 1</div>
       </div>
-      <span class="pub-type-badge badge-journal">Journal</span>
     </div>
 
-    <div class="pub-item reveal" data-type="journal">
+    <div class="pub-item" data-type="journal">
       <span class="pub-year">2018</span>
-      <div class="pub-body">
-        <div class="pub-title">Optimal DASH-Multicasting over LTE</div>
+      <div>
+        <div class="pub-title">Optimal DASH-Multicasting over LTE <span class="pub-badge badge-journal">Journal</span></div>
         <div class="pub-authors">Jounsup Park, Jenq-Neng Hwang, Qiyue Li, Yiling Xu, Wei Huang</div>
         <div class="pub-venue">IEEE Transactions on Vehicular Technology, vol. 67, no. 5</div>
       </div>
-      <span class="pub-type-badge badge-journal">Journal</span>
     </div>
 
-    <div class="pub-item reveal" data-type="conference">
+    <div class="pub-item" data-type="conference">
       <span class="pub-year">2018</span>
-      <div class="pub-body">
-        <div class="pub-title">Volumetric Media Streaming for Augmented Reality</div>
+      <div>
+        <div class="pub-title">Volumetric Media Streaming for Augmented Reality <span class="pub-badge badge-conference">Conference</span></div>
         <div class="pub-authors">Jounsup Park, Philip A. Chou, Jenq-Neng Hwang</div>
         <div class="pub-venue">IEEE GLOBECOM 2018</div>
       </div>
-      <span class="pub-type-badge badge-conference">Conference</span>
     </div>
 
-    <div class="pub-item reveal" data-type="conference">
+    <div class="pub-item" data-type="conference">
       <span class="pub-year">2018</span>
-      <div class="pub-body">
-        <div class="pub-title">Cross-Layer Optimization for VR Video Multicast Systems</div>
+      <div>
+        <div class="pub-title">Cross-Layer Optimization for VR Video Multicast Systems <span class="pub-badge badge-conference">Conference</span></div>
         <div class="pub-authors">Jounsup Park, Jenq-Neng Hwang, Hung-Yu Wei</div>
         <div class="pub-venue">IEEE GLOBECOM 2018</div>
       </div>
-      <span class="pub-type-badge badge-conference">Conference</span>
     </div>
 
-    <div class="pub-item reveal" data-type="conference">
+    <div class="pub-item" data-type="conference">
       <span class="pub-year">2015</span>
-      <div class="pub-body">
-        <div class="pub-title">Optimal Power Allocation and Rate Adaptation for Scalable Video over Multi-User MIMO</div>
+      <div>
+        <div class="pub-title">Optimal Power Allocation and Rate Adaptation for Scalable Video over Multi-User MIMO <span class="pub-badge badge-conference">Conference</span></div>
         <div class="pub-authors">Jounsup Park, Xiang Chen, Jenq-Neng Hwang</div>
         <div class="pub-venue">IEEE GLOBECOM 2015</div>
       </div>
-      <span class="pub-type-badge badge-conference">Conference</span>
     </div>
 
-    <div class="pub-item reveal" data-type="patent">
+    <div class="pub-item" data-type="patent">
       <span class="pub-year">2015</span>
-      <div class="pub-body">
-        <div class="pub-title">Apparatus and Method for Establishing Contention Window in WiMedia Wireless Network</div>
+      <div>
+        <div class="pub-title">Apparatus and Method for Establishing Contention Window in WiMedia Wireless Network <span class="pub-badge badge-patent">Patent</span></div>
         <div class="pub-authors">Jounsup Park et al.</div>
         <div class="pub-venue">US Patent 9,042,284</div>
       </div>
-      <span class="pub-type-badge badge-patent">Patent</span>
     </div>
 
-    <div class="pub-item reveal" data-type="patent">
+    <div class="pub-item" data-type="patent">
       <span class="pub-year">2014</span>
-      <div class="pub-body">
-        <div class="pub-title">Apparatus and Method for Super High-Speed Wireless Communications</div>
+      <div>
+        <div class="pub-title">Apparatus and Method for Super High-Speed Wireless Communications <span class="pub-badge badge-patent">Patent</span></div>
         <div class="pub-authors">Jounsup Park, Myeong Woo Han</div>
         <div class="pub-venue">US Patent 8,849,345</div>
       </div>
-      <span class="pub-type-badge badge-patent">Patent</span>
     </div>
 
-    <div class="pub-item reveal" data-type="conference">
+    <div class="pub-item" data-type="conference">
       <span class="pub-year">2011</span>
-      <div class="pub-body">
-        <div class="pub-title">A High-Speed Low-Complexity Modified Radix-2⁵ FFT Processor for Gigabit WPAN Applications</div>
+      <div>
+        <div class="pub-title">A High-Speed Low-Complexity Modified Radix-2⁵ FFT Processor for Gigabit WPAN Applications <span class="pub-badge badge-conference">Conference</span></div>
         <div class="pub-authors">Taesang Cho, Hanho Lee, Jounsup Park, Chulgyun Park</div>
         <div class="pub-venue">IEEE ISCAS 2011</div>
       </div>
-      <span class="pub-type-badge badge-conference">Conference</span>
     </div>
 
   </div>
 </section>
 
 <!-- CONTACT -->
-<div id="contact" class="contact-bg">
-  <div class="section">
-    <p class="section-label reveal">Contact</p>
-    <h2 class="section-title reveal">Get In Touch</h2>
-    <div class="contact-grid">
-      <div>
-        <p class="contact-desc">We welcome inquiries from prospective graduate students, research collaborators, and industry partners. Feel free to reach out to discuss research opportunities or ongoing projects.</p>
-        <div class="contact-info-list">
-          <div class="contact-info-item">
-            <span class="ci-label">PI</span>
-            <span class="ci-value">Dr. Jounsup Park</span>
-          </div>
-          <div class="contact-info-item">
-            <span class="ci-label">Email</span>
-            <span class="ci-value"><a href="mailto:joupark@calbaptist.edu">joupark@calbaptist.edu</a></span>
-          </div>
-          <div class="contact-info-item">
-            <span class="ci-label">Lab Website</span>
-            <span class="ci-value"><a href="https://joupark.github.io" target="_blank">joupark.github.io</a></span>
-          </div>
-          <div class="contact-info-item">
-            <span class="ci-label">Google Scholar</span>
-            <span class="ci-value"><a href="https://scholar.google.com/citations?user=r6S0NJUAAAAJ" target="_blank">View Profile →</a></span>
-          </div>
-          <div class="contact-info-item">
-            <span class="ci-label">Institution</span>
-            <span class="ci-value" style="color:#888">School of Engineering<br>California Baptist University<br>Riverside, CA 92504</span>
-          </div>
-        </div>
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="contact-grid">
+    <div>
+      <div class="contact-item">
+        <div class="contact-label">PI</div>
+        <div class="contact-value">Jounsup Park</div>
       </div>
-      <div class="contact-box reveal">
-        <div class="contact-box-title">Prospective Students</div>
-        <p class="contact-box-text">If you are interested in joining SAIL Lab as a graduate student or research assistant, please send an email with your CV and a brief description of your research interests.</p>
-        <a href="mailto:joupark@calbaptist.edu" class="contact-box-link">Send Email →</a>
+      <div class="contact-item">
+        <div class="contact-label">Email</div>
+        <div class="contact-value"><a href="mailto:joupark@calbaptist.edu">joupark@calbaptist.edu</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Google Scholar</div>
+        <div class="contact-value"><a href="https://scholar.google.com/citations?user=r6S0NJUAAAAJ" target="_blank">View Profile</a></div>
+      </div>
+    </div>
+    <div>
+      <div class="contact-item">
+        <div class="contact-label">Institution</div>
+        <div class="contact-value">California Baptist University<br>School of Engineering<br>Riverside, CA 92504</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Joining the Lab</div>
+        <div class="contact-value">Prospective students are welcome to reach out by email with a CV and research interests.</div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <footer>
-  <span class="footer-text">© 2025 SAIL Lab · California Baptist University</span>
-  <span class="footer-text">PI: Jounsup Park · joupark@calbaptist.edu</span>
+  © 2025 SAIL Lab · California Baptist University · PI: Jounsup Park
 </footer>
 
 <script>
-  // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 60);
-    });
-  }, { threshold: 0.06 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // Publication filter
-  document.querySelectorAll('.pub-filter-btn').forEach(btn => {
+  document.querySelectorAll('.pub-filters button').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.pub-filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.pub-filters button').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const filter = btn.dataset.filter;
+      const f = btn.dataset.filter;
       document.querySelectorAll('.pub-item').forEach(item => {
-        if (filter === 'all' || item.dataset.type === filter) {
-          item.classList.remove('hidden');
-        } else {
-          item.classList.add('hidden');
-        }
+        item.classList.toggle('hidden', f !== 'all' && item.dataset.type !== f);
       });
     });
   });
 </script>
+
 </body>
 </html>
